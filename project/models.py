@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
 
 from project.setup.db import models
 
@@ -14,23 +14,22 @@ class Director(models.Base):
 
 
 class Movie(models.Base):
-    __tablename__ = 'films'
-    id = Column(Integer, primary_key=True, unique=True, nullable=False)
-    title = Column(String(255), nullable=False)
+    __tablename__ = 'movies'
+    title = Column(String(255), nullable=False, unique=True)
     description = Column(String(255))
-    trailer = """ссылка на трейлер"""
-    year = Column(Integer)  # А они не стринги тоже?
-    rating = Column(Integer)
-    genre_id = Column(Integer)
-    director_id = Column(Integer)
+    trailer = Column(String(255))  # Тут юрла лежит
+    year = Column(String(100))
+    rating = Column(Float())
+    genre_id = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'))
+    # Вытянет название таблицы (каким бы оно ни стало в итоге) и id
+    director_id = Column(Integer, ForeignKey(f'{Director.__tablename__}.id'))
 
 
 class User(models.Base):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True, unique=True, nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
-    """не забывайте, что пароль тут будет в хешированном виде"""
+    """не забывайте, что пароль тут будет в хешированном виде"""  # Имеется в виду, что строка?
     name = Column(String(255))
     surname = Column(String(255))
-    favorite_genre = Column(String(255))
+    favourite_genre = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'))

@@ -1,4 +1,4 @@
-from project.dao.model.director import Director
+from project.models import Director
 
 
 class DirectorDAO:

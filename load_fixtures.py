@@ -10,14 +10,14 @@ from project.setup.db import db, models
 from project.utils import read_json
 
 
-def load_data(data: List[Dict[str, Any]], model: Type[models.Base]) -> None:
+def load_data(data: List[Dict[str, Any]], model: Type[models.Base]) -> None:  # 'Возвращает': '->'
     for item in data:
         item['id'] = item.pop('pk')
         db.session.add(model(**item))
 
 
 if __name__ == '__main__':
-    fixtures: Dict[str, List[Dict[str, Any]]] = read_json("fixtures.json")
+    fixtures: Dict[str, List[Dict[str, Any]]] = read_json("fixtures.json")  # 'Получает': ':'
 
     app = create_app(config)
 

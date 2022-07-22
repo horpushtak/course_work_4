@@ -4,7 +4,7 @@ from project.container import movie_service
 from project.setup.api.models import movie
 from project.setup.api.parsers import page_parser
 
-api = Namespace('genres')
+api = Namespace('movies')
 
 
 @api.route('/')
@@ -24,6 +24,6 @@ class MovieView(Resource):
     @api.marshal_with(movie, code=200, description='OK')
     def get(self, movie_id: int):
         """
-        Get genre by id.
+        Get movie by id.
         """
         return movie_service.get_item(movie_id)
