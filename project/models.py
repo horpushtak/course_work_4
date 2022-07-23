@@ -18,7 +18,7 @@ class Movie(models.Base):
     title = Column(String(255), nullable=False, unique=True)
     description = Column(String(255))
     trailer = Column(String(255))  # Тут юрла лежит
-    year = Column(String(100))
+    year = Column(Integer)
     rating = Column(Float())
     genre_id = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'))
     # Вытянет название таблицы (каким бы оно ни стало в итоге) и id
