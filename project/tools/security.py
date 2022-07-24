@@ -36,7 +36,8 @@ def generate_tokens(email, password, password_hash=None, is_refresh=False):
         abort()
     """Так, я подзабыл как именно работает вот это присваивание в аргуметах функции compare_passwords_hash
     сначала пишется имя переменной, как она описана в используемой функции, а приравневается та переменная, чтоб
-    используется здесь, в generate_tokens"""
+    используется здесь, в generate_tokens
+    positional argument and keyword argument"""
     if not is_refresh:
         if not compare_passwords_hash(comparing_password=password, password_hash=password_hash):
             abort()
@@ -63,3 +64,9 @@ def approve_refresh_token(refresh_token):
     password = data.get('password')
 
     return generate_tokens(email, password, is_refresh=True)
+
+
+def get_data_from_token(refresh_token):
+    data = jwt.decode(jwt=refresh_token, key=current_app.config['SECRET_KEY'], algorithm=current_app.config['ALGORITHM'])
+
+    return data
