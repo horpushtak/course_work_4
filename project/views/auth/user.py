@@ -5,6 +5,7 @@ from project.setup.api.models import user
 
 api = Namespace('user')
 
+
 @api.route('/register/')
 class RegisterUser(Resource):
     @api.marshal_with(user, as_list=True, code=200, description='OK')

@@ -31,7 +31,7 @@ class Movie(models.Base):
 class User(models.Base):
     __tablename__ = 'users'
     email = Column(String(255), unique=True, nullable=False)
-    password = Column(String(255), nullable=False)
+    password = Column(String(255))
     """не забывайте, что пароль тут будет в хешированном виде"""  # Имеется в виду, что будет строка?
     name = Column(String(255))
     surname = Column(String(255))
