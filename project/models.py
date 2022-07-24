@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
 from project.setup.db import models
 
@@ -23,13 +24,16 @@ class Movie(models.Base):
     genre_id = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'))
     # Вытянет название таблицы (каким бы оно ни стало в итоге) и id
     director_id = Column(Integer, ForeignKey(f'{Director.__tablename__}.id'))
+    genre = relationship('Genre')
+    director = relationship('Director')
 
 
 class User(models.Base):
     __tablename__ = 'users'
     email = Column(String(255), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
-    """не забывайте, что пароль тут будет в хешированном виде"""  # Имеется в виду, что строка?
+    """не забывайте, что пароль тут будет в хешированном виде"""  # Имеется в виду, что будет строка?
     name = Column(String(255))
     surname = Column(String(255))
     favourite_genre = Column(Integer, ForeignKey(f'{Genre.__tablename__}.id'))
+    genre = relationship('Genre')

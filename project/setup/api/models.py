@@ -19,8 +19,8 @@ movie: Model = api.model('Фильм', {
     'trailer': fields.String(),
     'year': fields.String(),
     'rating': fields.Float(),
-    'genre_id': fields.Nested(genre),
-    'director_id': fields.Nested(director),
+    'genre': fields.Nested(genre),
+    'director': fields.Nested(director),
 
 })
 
